@@ -9,11 +9,12 @@ import json
 table = 'Gwaff'
 start_date = 'January 14th, 2023 11'
 end_date = ''
+names = []
 columns = []
 x_val = []
 y_val = []
 annotations = []
-sep = 35
+sep = 45
 
 # Define Functions
 def annotate(annotations):
@@ -39,8 +40,8 @@ dbname = credentials['dbname']
 engine = create_engine(f'mysql+mysqlconnector://{username}:{password}@{host}/{dbname}')
 plt.style.use('fivethirtyeight')
 fig, ax = plt.subplots()
-ax.set(xlim=(0, 12), xticks=[0,1,2,3,4,5,6,7,8,9,10,11,12],
-       ylim=(0, 1100), yticks=[0,100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500],
+ax.set(xlim=(0, 25), xticks=[0],
+       ylim=(0, 2000), yticks=[0,100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800,1900,2000],
        title=("Top Chatters XP Growth"), ylabel=("XP Gained"), xlabel=("Date (M/D/Y) EST"))
 plt.subplots_adjust(left=0.08, right=0.8, bottom=0.08, top=0.9, wspace=0.2, hspace=0.2)
 
@@ -66,6 +67,12 @@ with engine.connect() as con:
     columns = columns.replace("]", "")
     columns = columns.replace("'", "")
     query = text(f"SELECT Nickname, Color, Icon, {columns} FROM {table} WHERE {start_date} != {end_date} ORDER BY {start_date} - {end_date} LIMIT 15")
+    if names != []:
+        names = str(names)
+        names = names.replace("[", "")
+        names = names.replace("]", "")
+        query = text(f"SELECT Nickname, Color, Icon, {columns} FROM {table} WHERE Username IN ({names}) ORDER BY {start_date} - {end_date}")
+        print(query)
     result = con.execute(query).fetchall()
 for row in result:
     for i in range(3, xp_columns+3):
