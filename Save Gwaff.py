@@ -35,7 +35,7 @@ start_date = start_date.replace(" ", "_")
 start_date = start_date.replace(",", "")
 start_date = start_date.replace("th", "")
 if start_date == '':
-    start_date = (datetime.now().replace(minute=0, second=0, microsecond=0) - timedelta(days=7)).strftime("%B_%d_%Y_%H")
+    start_date = (datetime.now().replace(hour=12, minute=0 second=0, microsecond=0) - timedelta(days=7)).strftime("%B_%d_%Y_%H")
 if end_date == '':
     end_date = datetime.now().strftime("%B_%d_%Y_%H")
 
