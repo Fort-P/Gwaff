@@ -1,7 +1,7 @@
 # Import Libraries
 from sqlalchemy import create_engine, text
 import matplotlib.pyplot as plt
-from datetime import datetime
+from datetime import datetime, timedelta
 import json
 
 from Plot import Plot
@@ -14,7 +14,7 @@ def sql_exec(query, engine):
 
 # Declare Global Vars
 table = 'Gwaff'
-start_date = 'January 14th, 2023 11'
+start_date = ''
 end_date = ''
 names = []
 
@@ -34,6 +34,8 @@ engine = create_engine(f'mysql+mysqlconnector://{username}:{password}@{host}/{db
 start_date = start_date.replace(" ", "_")
 start_date = start_date.replace(",", "")
 start_date = start_date.replace("th", "")
+if start_date == '':
+    start_date = (datetime.now().replace(minute=0, second=0, microsecond=0) - timedelta(days=7)).strftime("%B_%d_%Y_%H")
 if end_date == '':
     end_date = datetime.now().strftime("%B_%d_%Y_%H")
 
@@ -78,4 +80,5 @@ for row in result_sql:
 XP_Growth = Plot(result, dates, 'Top XP Growth', 'XP Growth', 'Dates')
 XP_Growth.draw()
 XP_Growth.annotate()
-XP_Growth.show()
+#XP_Growth.show()
+XP_Growth.save('Gwaff.png')
