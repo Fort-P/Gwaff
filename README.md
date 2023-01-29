@@ -5,7 +5,7 @@
 ![Made by](https://img.shields.io/badge/made%20by-Fort--P-blue)
 
 ![Gwaff](http://150.136.169.40:8088/gwaff.png)
- <p style="text-align: center">User XP data for Mumbo's Discord</p>
+ <p align=center>User XP data for Mumbo's Discord</p>
 
 # About
 
