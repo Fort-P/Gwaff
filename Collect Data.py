@@ -64,8 +64,7 @@ def record_data(url, pages, table, time):
     
     with engine.connect() as con:
         try:
-#             con.execute(f"ALTER TABLE {table} ADD COLUMN {time} INT NULL DEFAULT NULL")
-            pass
+            con.execute(f"ALTER TABLE {table} ADD COLUMN {time} INT NULL DEFAULT NULL")
         except:
             pass
     
@@ -90,7 +89,7 @@ def record_data(url, pages, table, time):
                 id = leaderboard[t]['id']
                 xp = leaderboard[t]['xp']
                 rank = leaderboard[t]['rank']
-            print("Saving Data for user: ", nickname, "(", xp, ")", sep="")
+            print("Saving Data for user: ", nickname, "(", xp, ")", sep="", end="")
             with engine.connect() as con:
                 if len(con.execute(f"SELECT * FROM {table} WHERE ID = '{id}'").fetchall()) > 0:
                     query = text(f"UPDATE {table} SET Rank = :rank WHERE ID = {id}")
@@ -108,6 +107,7 @@ def record_data(url, pages, table, time):
                 else:
                     query = text(f"INSERT INTO {table} (`ID`, `Rank`, `Username`, `Nickname`, `Color`, `Icon`, `{time}`) VALUES (:id, :rank, :username, :nickname, :color, :icon, :xp)")
                     con.execute(query, id = str(id), rank = str(rank), username = username, nickname = nickname, color = color, icon = icon, xp = str(xp))
+            print("\t Saved!")
 
 record_data(base_url, range(1,6), table, datetime.now().strftime("%B_%d_%Y_%H"))
 
