@@ -69,8 +69,14 @@ for row in result_sql:
             value = i
         elif i == row[3]:
             value = 0
+        elif i == None:
+            value = row_x[-1]
         else:
-            value = row[counter] - row[(counter-1)] + row_x[-1]
+            try:
+                value = row[counter] - row[(counter-1)] + row_x[-1]
+            except TypeError:
+                value = row[counter] - row[(counter-2)] + row_x[-1]
+        print(value)
         row_x.append(value)
         counter += 1
     result.append(row_x)

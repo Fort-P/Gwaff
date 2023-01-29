@@ -5,7 +5,7 @@ class Plot:
     def __init__(self, data, dates, title, ylbl, xlbl, start=None, end=None):
         self.data = data
         self.dates = dates
-        ticks = [i for i, item in enumerate(self.dates) if i % 24 == 0]
+        ticks = [i for i, item in enumerate(self.dates) if item.endswith("12")]
         self.start = start
         self.end = end
         

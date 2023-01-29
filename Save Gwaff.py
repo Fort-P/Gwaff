@@ -35,7 +35,7 @@ start_date = start_date.replace(" ", "_")
 start_date = start_date.replace(",", "")
 start_date = start_date.replace("th", "")
 if start_date == '':
-    start_date = (datetime.now().replace(hour=12, minute=0, second=0, microsecond=0) - timedelta(days=7)).strftime("%B_%d_%Y_%H")
+    start_date = (datetime.now().replace(minute=0, second=0, microsecond=0) - timedelta(days=7)).strftime("%B_%d_%Y_%H")
 if end_date == '':
     end_date = datetime.now().strftime("%B_%d_%Y_%H")
 
@@ -70,8 +70,14 @@ for row in result_sql:
             value = i
         elif i == row[3]:
             value = 0
+        elif i == None:
+            value = row_x[-1]
         else:
-            value = row[counter] - row[(counter-1)] + row_x[-1]
+            try:
+                value = row[counter] - row[(counter-1)] + row_x[-1]
+            except TypeError:
+                value = row[counter] - row[(counter-2)] + row_x[-1]
+        print(value)
         row_x.append(value)
         counter += 1
     result.append(row_x)
@@ -80,5 +86,4 @@ for row in result_sql:
 XP_Growth = Plot(result, dates, 'Top XP Growth', 'XP Growth', 'Dates')
 XP_Growth.draw()
 XP_Growth.annotate()
-#XP_Growth.show()
-XP_Growth.save('images/Gwaff-Current')
+XP_Growth.save("Gwaff.png")
