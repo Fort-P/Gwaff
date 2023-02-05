@@ -90,7 +90,7 @@ def Parse(table, start_date, end_date, names):
 
 Parse(table, start_date, end_date, names)
 hour_later = datetime.now().replace(minute=5, second=0, microsecond=0) + timedelta(hours=1)
-
+print("hour later:", hour_later)
 
 while True:
     time = datetime.now()
@@ -99,3 +99,4 @@ while True:
         Parse(table, start_date, end_date, names)
     else:
         sleep(5*60)
+        print('sleep')
