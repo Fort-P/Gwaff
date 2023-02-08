@@ -15,18 +15,8 @@ This is my version of the Gwaff for the Mumbo Jumbo Discord Server! If you are u
 
 Feel free to take a look around, and use all or parts of the code for your own use.
 
-If you would like to use my data, you can get the most recent Gwaff at http://150.136.169.40:8088/gwaff.png, or parse the SQL table yourself to do more with the data collected.
+To install all required dependancies for the project:
+```
+pip install -r requirements.txt
+```
 
-If you choose to parse the data yourself, here is a set of credentials for the SQL server with veiw permissions for that table only.
-
-**Username:**
-Veiwer
-
-**Password:**
-V1ewM3XP!
-
-**Host:**
-150.136.169.40
-
-**Port:**
-3306
